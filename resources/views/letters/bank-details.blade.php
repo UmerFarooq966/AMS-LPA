@@ -108,7 +108,7 @@
         <table class="header-table">
             <tr>
                 <td class="logo">
-                    <img src="{{ public_path('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
+                    <img src="{{ asset('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
                 </td>
                 <td class="logo-text" style="text-align:center">
                     <b> London Professional <br>

@@ -96,7 +96,7 @@
         <table class="header-table">
             <tr>
                 <td class="logo">
-                    <img src="{{ public_path('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
+                    <img src="{{ asset('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
                 </td>
                 <td>
                     <h3 style="text-align:center">London Professional <br> Academy</h3>
@@ -172,7 +172,7 @@
         <!-- Signature Section -->
         <div class="signature">
             <p>Yours faithfully,</p>
-            <img src="{{ public_path('storage/resources/paul-signature.jpeg') }}" alt="Signature">
+            <img src="{{ asset('storage/resources/paul-signature.jpeg') }}" alt="Signature">
             <p><strong>Paul Smith</strong></p>
             <p>Director of Admissions</p>
             <p>London Professional Academy</p>
