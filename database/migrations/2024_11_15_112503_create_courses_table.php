@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('course_duration');
             $table->date('course_completion_date');
             $table->decimal('tuition_fee', 10, 2);
+            $table->decimal('registration_fee', 10, 2);
             $table->timestamps();
         });
     }

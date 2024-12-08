@@ -9,11 +9,11 @@
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
                     <label for="university_name" class="block text-sm font-medium text-gray-700">University Name</label>
-                    <input type="text" name="university_name" id="university_name" value="LPA" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <input type="text" name="university_name" id="university_name" value="LPA" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" disabled>
                 </div>
                 <div>
                     <label for="admission_year" class="block text-sm font-medium text-gray-700">Admission Year</label>
-                    <input type="number" name="admission_year" id="admission_year" value="{{ date('Y') }}" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <input type="number" name="admission_year" id="admission_year" value="{{ date('Y') }}" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" disabled>
                 </div>
                 <div>
                     <label for="course_code" class="block text-sm font-medium text-gray-700">Course Code</label>
@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <label for="r_id" class="block text-sm font-medium text-gray-700">Reference ID</label>
-                    <input type="text" name="r_id" id="r_id" value="{{ old('r_id', date('Y') . sprintf('%04d', (App\Models\Student::orderBy('id', 'desc')->first()->id ?? 0) + 1)) }}" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <input type="text" name="r_id" id="r_id" value="{{ old('r_id', date('Y') . sprintf('%04d', (App\Models\Student::orderBy('id', 'desc')->first()->id ?? 0) + 1)) }}" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" disabled>
                 </div>
                 <div>
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
@@ -86,10 +86,21 @@
                         @endforeach
                     </select>
                 </div>
+                <div>
+                    <label for="agent_id" class="block text-sm font-medium text-gray-700">Agent</label>
+                    <select name="agent_id" id="agent_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm searchable-select" required>
+                        <option value="">Select Agent Name</option>
+                        @foreach($agents as $agent)
+                        <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
             </div>
             <div class="mt-6">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Save as new student</button>
             </div>
         </form>
     </div>
+
     @endsection

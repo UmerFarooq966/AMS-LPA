@@ -23,6 +23,7 @@ class Course extends Model
         'date_of_birth',
         'course_id',
         'bank_id',
+        'registration_fee',
     ];
 
     public function course()

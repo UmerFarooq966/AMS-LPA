@@ -50,6 +50,18 @@
                     <input type="text" name="nationality" id="nationality" value="{{ $student->nationality }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
                 </div>
                 <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                    <input type="text" name="country" id="country" value="{{ $student->country }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                </div>
+                <div>
+                    <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                    <input type="text" name="city" id="city" value="{{ $student->city }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                </div>
+                <div>
+                    <label for="embassy" class="block text-sm font-medium text-gray-700">Embassy</label>
+                    <input type="text" name="embassy" id="embassy" value="{{ $student->embassy }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" placeholder="Name and City of Embassy" required>
+                </div>
+                <div>
                     <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
                     <input type="date" name="date_of_birth" id="date_of_birth" value="{{ $student->date_of_birth }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
                 </div>
@@ -78,6 +90,20 @@
                         @endforeach
                     </select>
                 </div>
+                <div>
+                    <label for="agent_id" class="block text-sm font-medium text-gray-700">Agent</label>
+                    <select name="agent_id" id="agent_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm searchable-select">
+                        <option value="" {{ is_null($student->agent_id) ? 'selected' : '' }}>Select Agent Name</option> <!-- Placeholder or No agent option -->
+                        @foreach($agents as $agent)
+                        <option value="{{ $agent->id }}" {{ $student->agent_id == $agent->id ? 'selected' : '' }}>
+                            {{ $agent->name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+
+
             </div>
             <div class="mt-6">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Update Student</button>

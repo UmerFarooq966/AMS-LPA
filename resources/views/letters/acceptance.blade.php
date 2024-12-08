@@ -107,7 +107,7 @@
         <table class="header-table">
             <tr>
                 <td class="logo">
-                    <img src="{{ asset('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
+                    <img src="{{ public_path('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
                 </td>
                 <td class="logo-text" style="text-align:center">
                     <b> London Professional <br>
@@ -171,9 +171,9 @@
             </tr>
             <tr>
                 <td><strong>Commencement:</strong></td>
-                <td>{{ date('jS F Y', strtotime($course->commencement_date)) }}</td>
+                <td>{{ date('jS F Y', strtotime($course->course_completion_date)) }}</td>
                 <td><strong>Completion:</strong></td>
-                <td>{{ date('jS F Y', strtotime($course->completion_date)) }}</td>
+                <td>{{ date('jS F Y', strtotime($course->course_completion_date)) }}</td>
             </tr>
             <tr>
                 <td><strong>Tuition Fee:</strong></td>
@@ -193,7 +193,7 @@
             <tr>
                 <td class="signature">
                     <p>Yours faithfully,</p>
-                    <img src="{{ asset('storage/resources/paul-signature.jpeg') }}" alt="Signature">
+                    <img src="{{ public_path('storage/resources/paul-signature.jpeg') }}" alt="Signature">
                     <p><strong>Paul Smith</strong></p>
                     <p>Director of Admissions</p>
                     <p>London Professional Academy</p>

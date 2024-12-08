@@ -10,6 +10,8 @@
         showDeleteModal: false, 
         selectedUser: {}, 
         selectedEmailId: '' ,
+         sortBy: '',
+        searchTerm: '',
      }">
     <!-- <div class="container mx-auto p-6"
         x-data="{ 
@@ -36,11 +38,26 @@
     </div>
     <h2 class="text-2xl font-semibold mb-4">Manage Students</h2>
 
+
     <div class="bg-white shadow-md rounded p-4">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-medium">Students</h3>
-            <p>Total Students: {{ $students->count() }}</p>
+            <div class="flex space-x-2">
+                <input type="text" x-model="searchTerm" placeholder="Search students..." class="border p-1 rounded-md" @input.debounce.500="$refs.searchForm.submit()">
+                <select x-model="sortBy" class="border p-1 rounded-md" @change="$refs.searchForm.submit()">
+                    <option value="">Sort By</option>
+                    <option value="name">Name (A-Z)</option>
+                    <option value="course">Course Name (A-Z)</option>
+                    <option value="date">Added Date</option>
+                    <option value="agent">Agent Name</option>
+                </select>
+            </div>
         </div>
+
+        <form x-ref="searchForm" method="GET" action="{{ route('student.index') }}">
+            <input type="hidden" name="search" :value="searchTerm">
+            <input type="hidden" name="sort" :value="sortBy">
+        </form>
 
         @if($students->isEmpty())
         <p class="text-center text-gray-500">No students available.</p>
@@ -51,39 +68,39 @@
                     <th class="py-2 px-4 text-left">Student ID</th>
                     <th class="py-2 px-4 text-left">Name</th>
                     <th class="py-2 px-4 text-left">Course Name</th>
+                    <th class="py-2 px-4 text-left">Agent</th>
                     <th class="py-2 px-4 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($students as $student)
                 <tr class="w-full border-b">
-                    <td class="py-2 px-4">{{ $student->r_id }}</td>
-                    <td class="py-2 px-4">{{ $student->first_name }} {{ $student->last_name }}</td>
-                    <td class="py-2 px-4">{{ $student->course->course_name }}</td>
-                    <td class="py-2 px-4">
-                        <!-- Pass data to the modal -->
-                        <button
-                            class="bg-black text-white py-1 px-3 rounded-lg"
-                            @click="selectedUser = {{ $student->toJson() }}; showModal = true">
-                            View User
-                        </button>
-                        <button class="bg-blue-500 text-white py-1 px-3 rounded-lg"
-                            @click="selectedUser = {{ $student->toJson() }}; showGenerateModal = true;">
-                            Generate Documents
-                        </button>
-
-                        <a href="{{ route('student.edit', $student->id) }}" class="bg-gray-300 text-black py-1.5 px-3 rounded-lg ml-2">Edit User</a>
-                        <button class="bg-red-500 text-white py-1 px-3 rounded-lg ml-2"
-                            @click="selectedUser = {{ $student->toJson() }}; showDeleteModal = true">
-                            Delete
-                        </button>
+                    <td class="py-2 px-4 whitespace-nowrap">{{ $student->r_id }}</td>
+                    <td class="py-2 px-4 whitespace-nowrap">{{ $student->first_name }} {{ $student->last_name }}</td>
+                    <td class="py-2 px-4 whitespace-nowrap">{{ $student->course->course_name }}</td>
+                    <td class="py-2 px-4 whitespace-nowrap">{{ $student->agent ? $student->agent->name : 'No Agent' }}</td>
+                    <td class="py-2 px-4 whitespace-nowrap">
+                        <div class="flex space-x-2">
+                            <button
+                                class="bg-black text-white py-1 px-3 rounded-lg"
+                                @click="selectedUser = {{ $student->toJson() }}; showModal = true">
+                                View User
+                            </button>
+                            <button class="bg-blue-500 text-white py-1 px-3 rounded-lg"
+                                @click="selectedUser = {{ $student->toJson() }}; showGenerateModal = true;">
+                                Generate Documents
+                            </button>
+                            <a href="{{ route('student.edit', $student->id) }}" class="bg-gray-300 text-black py-1 px-3 rounded-lg">Edit User</a>
+                            <button class="bg-red-500 text-white py-1 px-3 rounded-lg"
+                                @click="selectedUser = {{ $student->toJson() }}; showDeleteModal = true">
+                                Delete
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
-
             </tbody>
         </table>
-
         <!-- Pagination -->
         <div class="flex justify-between items-center mt-4">
             <p>{{ $students->firstItem() }}-{{ $students->lastItem() }} of {{ $students->total() }}</p>
@@ -174,7 +191,8 @@
         class="fixed inset-0 bg-gray-900 bg-opacity-60 flex items-center justify-center z-50"
         style="display: none;"
         @click.away="showModal = false">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-2/3 max-w-3xl relative">
+
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full sm:w-5/6 md:w-2/3 lg:w-1/2 max-h-screen overflow-y-auto relative">
             <!-- Close Button -->
             <button
                 @click="showModal = false"
@@ -239,6 +257,18 @@
                         <strong class="text-gray-700">Passport Number:</strong>
                         <p class="text-gray-600" x-text="selectedUser.passport_number"></p>
                     </div>
+                    <div>
+                        <strong class="text-gray-700">Country:</strong>
+                        <p class="text-gray-600" x-text="selectedUser.country"></p>
+                    </div>
+                    <div>
+                        <strong class="text-gray-700">City:</strong>
+                        <p class="text-gray-600" x-text="selectedUser.city"></p>
+                    </div>
+                    <div>
+                        <strong class="text-gray-700">Embassy:</strong>
+                        <p class="text-gray-600" x-text="selectedUser.embassy"></p>
+                    </div>
                 </div>
             </div>
 
@@ -249,6 +279,10 @@
                     <div>
                         <strong class="text-gray-700">Bank Name:</strong>
                         <p class="text-gray-600" x-text="selectedUser.bank.bank_name"></p>
+                    </div>
+                    <div>
+                        <strong class="text-gray-700">Agent Name:</strong>
+                        <p class="text-gray-600" x-text="selectedUser.agent ? selectedUser.agent.name : 'No Agent Selected'"></p>
                     </div>
                 </div>
             </div>

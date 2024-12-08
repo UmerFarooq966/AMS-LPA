@@ -4,7 +4,11 @@
            : window.location.pathname.includes('/dashboard/analytics') ? 'dashboard-analytics' 
            : window.location.pathname.includes('/student/index') ? 'students-show' 
            : window.location.pathname.includes('/student/create') ? 'students-create' 
-           : window.location.pathname.includes('/student/manage') ? 'students-manage' 
+           : window.location.pathname.includes('/student/deleted') ? 'students-deleted' 
+           : window.location.pathname.includes('/agents') ? 'agents-show' 
+           : window.location.pathname.includes('/agents/create') ? 'agents-create' 
+           : window.location.pathname.includes('/courses') ? 'courses-show' 
+           : window.location.pathname.includes('/courses/create') ? 'courses-create' 
            : window.location.pathname.includes('/emails/compose') ? 'emails-compose' 
            : window.location.pathname.includes('/emails/manage') ? 'emails-manage' 
            : window.location.pathname.includes('/admins/add') ? 'admins-add' 
@@ -69,8 +73,60 @@
                         :class="activeSubmenu === 'students-show' ? 'bg-gray-200' : ''">Show Student</a>
                     <a href="{{route('student.create')}}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
                         :class="activeSubmenu === 'students-create' ? 'bg-gray-200' : ''">Add Student</a>
-                    <a href="#" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
-                        :class="activeSubmenu === 'students-manage' ? 'bg-gray-200' : ''">Manage Students</a>
+                    <a href="{{route('student.deleted')}}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
+                        :class="activeSubmenu === 'students-deleted' ? 'bg-gray-200' : ''">Show Deleted Student</a>
+
+
+                </div>
+            </li>
+
+            <!-- Agents Link with Submenu -->
+            <li class="relative m-2">
+                <a href="#" @click.prevent="activeSubmenu = 'agents'" class="flex flex-col items-center px-4 py-2 text-sm font-medium hover:bg-blue-800 rounded"
+                    :class="activeSubmenu.includes('agents') ? 'bg-blue-800' : ''">
+                    <i :class="activeSubmenu.includes('agents') ? 'text-yellow-400' : 'text-white'" class="mr-2 fas fa-user-tie text-xl"></i> Agents
+                </a>
+                <div x-show="activeSubmenu.includes('agents')"
+                    class="fixed left-32 top-16 bg-white text-gray-800 w-52 h-screen p-4 shadow-lg space-y-2">
+
+                    <!-- Extra Agents Item at the Top -->
+                    <div class="absolute -mt-16 flex flex-row items-center px-4 py-2 text-sm font-medium ">
+                        <div class="bg-blue-200 rounded-lg p-2 flex items-center justify-center w-8 h-8 mr-1 text-blue-700">
+                            <i class="fas fa-user-tie text-xl"></i>
+                        </div>
+                        Agents
+                    </div>
+
+                    <a href="{{ route('agents.index') }}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
+                        :class="activeSubmenu === 'agents-show' ? 'bg-gray-200' : ''">Show Agents</a>
+                    <a href="{{ route('agents.create') }}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
+                        :class="activeSubmenu === 'agents-create' ? 'bg-gray-200' : ''">Add Agent</a>
+
+                </div>
+            </li>
+
+            <!-- Courses Link with Submenu -->
+            <li class="relative m-2">
+                <a href="#" @click.prevent="activeSubmenu = 'courses'" class="flex flex-col items-center px-4 py-2 text-sm font-medium hover:bg-blue-800 rounded"
+                    :class="activeSubmenu.includes('courses') ? 'bg-blue-800' : ''">
+                    <i :class="activeSubmenu.includes('courses') ? 'text-yellow-400' : 'text-white'" class="mr-2 fas fa-book text-xl"></i> Courses
+                </a>
+                <div x-show="activeSubmenu.includes('courses')"
+                    class="fixed left-32 top-16 bg-white text-gray-800 w-52 h-screen p-4 shadow-lg space-y-2">
+
+                    <!-- Extra Courses Item at the Top -->
+                    <div class="absolute -mt-16 flex flex-row items-center px-4 py-2 text-sm font-medium ">
+                        <div class="bg-blue-200 rounded-lg p-2 flex items-center justify-center w-8 h-8 mr-1 text-blue-700">
+                            <i class="fas fa-book text-xl"></i>
+                        </div>
+                        Courses
+                    </div>
+
+                    <a href="{{ route('courses.index') }}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
+                        :class="activeSubmenu === 'courses-show' ? 'bg-gray-200' : ''">Show Courses</a>
+                    <a href="{{ route('courses.create') }}" class="block px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded"
+                        :class="activeSubmenu === 'courses-create' ? 'bg-gray-200' : ''">Add Course</a>
+
                 </div>
             </li>
 
