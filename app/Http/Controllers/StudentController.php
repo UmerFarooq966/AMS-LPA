@@ -14,7 +14,6 @@ class StudentController extends Controller
 {
     public function index(Request $request)
     {
-        // Use the filter scope to apply search and sorting
         $students = Student::with(['course', 'bank', 'agent'])
             ->filter($request->only(['search', 'sort']))
             ->whereNull('deleted_at')

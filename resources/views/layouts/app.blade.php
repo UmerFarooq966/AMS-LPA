@@ -137,6 +137,25 @@
         });
     });
 </script>
+<!-- sorting -->
+<script>
+    function tableLogic() {
+        return {
+            sortBy: '',
+            sortOrder: 'asc',
+            searchTerm: '',
+            toggleSort(column) {
+                if (this.sortBy === column) {
+                    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+                } else {
+                    this.sortBy = column;
+                    this.sortOrder = 'asc';
+                }
+                this.$refs.searchForm.submit();
+            }
+        }
+    }
+</script>
 
 
 

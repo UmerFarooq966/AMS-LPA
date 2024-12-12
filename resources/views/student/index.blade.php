@@ -38,25 +38,33 @@
     </div>
     <h2 class="text-2xl font-semibold mb-4">Manage Students</h2>
 
-
     <div class="bg-white shadow-md rounded p-4">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-medium">Students</h3>
             <div class="flex space-x-2">
+                <!-- Search Input -->
                 <input type="text" x-model="searchTerm" placeholder="Search students..." class="border p-1 rounded-md" @input.debounce.500="$refs.searchForm.submit()">
+                <!-- Sort Dropdown -->
                 <select x-model="sortBy" class="border p-1 rounded-md" @change="$refs.searchForm.submit()">
                     <option value="">Sort By</option>
-                    <option value="name">Name (A-Z)</option>
-                    <option value="course">Course Name (A-Z)</option>
-                    <option value="date">Added Date</option>
+                    <option value="student_id">Student ID</option>
+                    <option value="name">Name</option>
+                    <option value="course_name">Course Name</option>
                     <option value="agent">Agent Name</option>
+                </select>
+                <!-- Order Toggle -->
+                <select x-model="sortOrder" class="border p-1 rounded-md" @change="$refs.searchForm.submit()">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
                 </select>
             </div>
         </div>
 
+        <!-- Sorting Form -->
         <form x-ref="searchForm" method="GET" action="{{ route('student.index') }}">
             <input type="hidden" name="search" :value="searchTerm">
             <input type="hidden" name="sort" :value="sortBy">
+            <input type="hidden" name="order" :value="sortOrder">
         </form>
 
         @if($students->isEmpty())
@@ -65,10 +73,26 @@
         <table class="min-w-full bg-white border">
             <thead>
                 <tr class="w-full border-b">
-                    <th class="py-2 px-4 text-left">Student ID</th>
-                    <th class="py-2 px-4 text-left">Name</th>
-                    <th class="py-2 px-4 text-left">Course Name</th>
-                    <th class="py-2 px-4 text-left">Agent</th>
+                    <th class="py-2 px-4 text-left cursor-pointer" @click="toggleSort('student_id')">
+                        Student ID
+                        <span x-show="sortBy === 'student_id' && sortOrder === 'asc'">▲</span>
+                        <span x-show="sortBy === 'student_id' && sortOrder === 'desc'">▼</span>
+                    </th>
+                    <th class="py-2 px-4 text-left cursor-pointer" @click="toggleSort('name')">
+                        Name
+                        <span x-show="sortBy === 'name' && sortOrder === 'asc'">▲</span>
+                        <span x-show="sortBy === 'name' && sortOrder === 'desc'">▼</span>
+                    </th>
+                    <th class="py-2 px-4 text-left cursor-pointer" @click="toggleSort('course_name')">
+                        Course Name
+                        <span x-show="sortBy === 'course_name' && sortOrder === 'asc'">▲</span>
+                        <span x-show="sortBy === 'course_name' && sortOrder === 'desc'">▼</span>
+                    </th>
+                    <th class="py-2 px-4 text-left cursor-pointer" @click="toggleSort('agent')">
+                        Agent
+                        <span x-show="sortBy === 'agent' && sortOrder === 'asc'">▲</span>
+                        <span x-show="sortBy === 'agent' && sortOrder === 'desc'">▼</span>
+                    </th>
                     <th class="py-2 px-4 text-left">Actions</th>
                 </tr>
             </thead>
@@ -101,6 +125,7 @@
                 @endforeach
             </tbody>
         </table>
+
         <!-- Pagination -->
         <div class="flex justify-between items-center mt-4">
             <p>{{ $students->firstItem() }}-{{ $students->lastItem() }} of {{ $students->total() }}</p>

@@ -46,38 +46,33 @@ class Student extends Model
         return $this->belongsTo(Agent::class);
     }
 
-    public function scopeFilter($query, $filters)
+    public function scopeFilter($query, array $filters)
     {
-        // Apply Search
+        // Apply search filter
         if (!empty($filters['search'])) {
-            $search = $filters['search'];
-            $query->where(function ($q) use ($search) {
-                $q->where('first_name', 'like', "%{$search}%")
-                    ->orWhere('last_name', 'like', "%{$search}%")
-                    ->orWhere('r_id', 'like', "%{$search}%")
-                    ->orWhereHas('course', function ($q) use ($search) {
-                        $q->where('course_name', 'like', "%{$search}%");
-                    })
-                    ->orWhereHas('agent', function ($q) use ($search) {
-                        $q->where('name', 'like', "%{$search}%");
-                    });
+            $query->where(function ($q) use ($filters) {
+                $q->where('first_name', 'like', '%' . $filters['search'] . '%')
+                    ->orWhere('last_name', 'like', '%' . $filters['search'] . '%')
+                    ->orWhere('r_id', 'like', '%' . $filters['search'] . '%');
             });
         }
 
-        // Apply Sorting
+        // Apply sorting
         if (!empty($filters['sort'])) {
             switch ($filters['sort']) {
+                case 'student_id':
+                    $query->orderBy('r_id', 'asc');
+                    break;
                 case 'name':
-                    $query->orderBy('first_name')->orderBy('last_name');
+                    $query->orderBy('first_name', 'asc');
                     break;
-                case 'course':
-                    $query->orderBy('course.course_name');
-                    break;
-                case 'date':
-                    $query->orderBy('created_at', 'desc');
+                case 'course_name':
+                    $query->orderBy('courses.course_name', 'asc'); // Assumes a relationship named 'course'
                     break;
                 case 'agent':
-                    $query->orderBy('agent.name');
+                    $query->orderBy('agents.name', 'asc'); // Assumes a relationship named 'agent'
+                    break;
+                default:
                     break;
             }
         }
