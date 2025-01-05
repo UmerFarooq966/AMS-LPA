@@ -41,9 +41,10 @@ require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/student/index', [StudentController::class, 'index'])->name('student.index');
     Route::get('/student/create', [StudentController::class, 'create'])->name('student.create');
-    Route::post('/student/create', [StudentController::class, 'store'])->name('student.store');
+    Route::post('/student/store', [StudentController::class, 'store'])->name('student.store');
     Route::get('/student/{id}/edit', [StudentController::class, 'edit'])->name('student.edit');
     Route::put('/student/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::delete('/student/{id}', [StudentController::class, 'destroy'])->name('student.destroy');

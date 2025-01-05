@@ -38,13 +38,14 @@ class StudentController extends Controller
     // Store a new student in the database
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'university_name' => 'required|string|max:255',
             'admission_year' => 'required|integer',
             'course_code' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'student_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'student_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'gender' => 'required|string',
             'passport_number' => 'required|string|max:255',
             'nationality' => 'required|string|max:255',
@@ -54,8 +55,9 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'course_id' => 'required|exists:courses,id',
             'bank_id' => 'required|exists:banks,id',
-            'agent_id' => 'exists:agents,id',
+            'agent_id' => 'required|exists:agents,id',
         ]);
+
 
         $year = Carbon::now()->year;
         $baseId = ($year - 2023) * 1000 + 1000;
