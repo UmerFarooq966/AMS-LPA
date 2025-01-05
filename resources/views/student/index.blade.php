@@ -231,7 +231,7 @@
                     <img
                         :src="'{{ asset('storage') }}/' + selectedUser.student_picture"
                         alt="Student Picture"
-                        class="w-24 h-24 rounded-full shadow" />
+                        class="w-24 h-auto rounded-full shadow" />
                 </div>
                 <div class="ml-6">
                     <h3 class="text-2xl font-semibold text-gray-800" x-text="selectedUser.first_name + ' ' + selectedUser.last_name"></h3>
