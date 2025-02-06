@@ -156,18 +156,34 @@ class StudentController extends Controller
 
     public function verifyPassword(Request $request)
     {
-        $studentId = $request->input('r_id');
+        $studentId = $request->input('student_id');
         $passportNumber = $request->input('password');
 
-        // Retrieve the student based on the r_id
-        $student = Student::where('r_id', $studentId)->first();
+        // Validate the minimum length of the input
+        if (strlen($studentId) < 8) { // Minimum required: 4 (r_id) + 4 (year)
+            return back()->withErrors(['student_id' => 'Invalid Student ID format. Please enter the correct format.']);
+        }
+
+        // Extract r_id and admission_year from the end of the string
+        $rIdLength = 4;
+        $yearLength = 4;
+
+        $rId = substr($studentId, -$rIdLength); // Last 4 characters
+        $admissionYear = substr($studentId, - ($rIdLength + $yearLength), $yearLength); // 4 characters before r_id
+        $courseCode = substr($studentId, 0, strlen($studentId) - ($rIdLength + $yearLength)); // Remaining characters
+
+        // Retrieve the student based on the composite ID and passport number
+        $student = Student::where('course_code', $courseCode)
+            ->where('admission_year', $admissionYear)
+            ->where('r_id', $rId)
+            ->first();
 
         if ($student && $student->passport_number === $passportNumber) {
             // Passport number is correct, show the student details
             return view('student.details', compact('student'));
         } else {
             // Incorrect details, show an error
-            return back()->withErrors(['password' => 'Incorrect student ID or passport number. Please try again.']);
+            return back()->withErrors(['password' => 'Incorrect Student ID or Passport Number. Please try again.']);
         }
     }
 }

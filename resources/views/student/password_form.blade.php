@@ -8,15 +8,19 @@
             <form action="{{ route('student.verifyPassword') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label for="r_id" class="block text-gray-700 font-semibold mb-2">Student ID:</label>
-                    <input type="number" name="r_id" id="r_id" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <label for="student_id" class="block text-gray-700 font-semibold mb-2">Student ID:</label>
+                    <input type="text" name="student_id" id="student_id" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="e.g., CS202320230001">
                 </div>
                 <div>
                     <label for="password" class="block text-gray-700 font-semibold mb-2">Passport Number:</label>
-                    <input type="password" name="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <input type="password" name="password" id="password" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <button type="submit" class="w-full py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600">Submit</button>
             </form>
+
 
             <!-- Error Message Section -->
             @if ($errors->any())

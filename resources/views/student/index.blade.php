@@ -99,7 +99,7 @@
             <tbody>
                 @foreach($students as $student)
                 <tr class="w-full border-b">
-                    <td class="py-2 px-4 whitespace-nowrap">{{ $student->r_id }}</td>
+                    <td class="py-2 px-4 whitespace-nowrap">{{ $student->course_code }}{{ $student->admission_year }}{{ $student->r_id }}</td>
                     <td class="py-2 px-4 whitespace-nowrap">{{ $student->first_name }} {{ $student->last_name }}</td>
                     <td class="py-2 px-4 whitespace-nowrap">{{ $student->course->course_name }}</td>
                     <td class="py-2 px-4 whitespace-nowrap">{{ $student->agent ? $student->agent->name : 'No Agent' }}</td>
@@ -235,7 +235,7 @@
                 </div>
                 <div class="ml-6">
                     <h3 class="text-2xl font-semibold text-gray-800" x-text="selectedUser.first_name + ' ' + selectedUser.last_name"></h3>
-                    <p class="text-gray-600 mt-1" x-text="'Student ID: ' + selectedUser.r_id"></p>
+                    <p class="text-gray-600 mt-1" x-text="'Student ID: '  + selectedUser.course_code + selectedUser.admission_year+ selectedUser.r_id"></p>
                 </div>
             </div>
 

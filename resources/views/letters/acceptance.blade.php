@@ -1,221 +1,339 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Course Acceptance Letter</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>LPA Course acceptance letter</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background: white;
         }
 
-        .container {
-
-            min-height: 297mm;
-            background: #fff;
+        .content {
+            width: auto;
+            height: 277mm;
+            padding: 10mm;
             box-sizing: border-box;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-
-        h2 {
-            font-size: 20px;
-
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        h3,
-        h4 {
-            text-transform: uppercase;
-            margin: 0 0 8px;
-            font-size: 14px;
+        .header .container {
+            display: flex;
+            font-size: 8px;
+            justify-content: space-between;
         }
 
-        p {
-            margin: 5px 0;
+        .header .lpa_logo {
+            max-width: 130px;
+            /* Reduced size */
+            height: auto;
+            padding-right: 15px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
+        .header .location_pin {
+            max-width: 50px;
+            /* Reduced size */
+            height: auto;
+            padding-right: 15px;
         }
 
-        table th,
-        table td {
-            padding: 8px;
-            font-size: 12px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .header-table,
-        .footer-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 10px;
-        }
-
-        .header-table td,
-        .footer-table td {
-            border: none;
-            padding: 5px;
-        }
-
-        .logo img {
-            max-width: 150px;
-        }
-
-        .logo-text {
-            font-size: 14px;
-            text-transform: uppercase;
-            line-height: 1.4;
-        }
-
-        .address {
+        .header .container p {
+            font-size: 15px;
+            /* Reduced font */
             text-align: right;
-            font-size: 12px;
-            line-height: 1.4;
         }
 
-        a {
-            color: #3b82f6;
-            text-decoration: underline;
+        /* BODY */
+        .body {
+            padding-left: 15px;
+            padding-right: 15px;
         }
 
-        .signature img {
-            max-width: 180px;
-
+        .body .intro {
+            font-size: 15px;
+            margin-top: 20px;
+            /* Reduced spacing */
+            display: flex;
+            justify-content: space-between;
         }
 
-        .qr img {
-            max-width: 80px;
+        .body .intro .date {
+            margin-top: -10px;
+            align-self: self-start;
         }
 
-        .signature,
-        .qr {
+        .body h4 {
             text-align: center;
+            text-decoration: underline;
+            font-size: 15px;
+        }
+
+        .body p {
+            font-size: 15px;
+            /* Reduced */
+            line-height: 18px;
+            /* Reduced */
+        }
+
+        /* TABLES */
+        .body .tables {
+            display: flex;
+            justify-content: space-between;
+            column-gap: 10px;
+            /* Reduced spacing */
+        }
+
+        .body .tables table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        .body .tables th,
+        .body .tables td {
+            padding: 3px 5px;
+            /* Reduced padding */
+            font-size: 15px;
+            /* Reduced font */
+            border: 1px solid #000;
+        }
+
+        /* FOOTER */
+        .body .footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .body .footer .signature {
+            max-width: 200px;
+            /* Reduced size */
+        }
+
+        .body .footer .qr {
+            width: 80px;
+            /* Reduced size */
+            height: max-content;
+        }
+
+        /* MAIN FOOTER */
+        .main-footer {
+            text-align: center;
+            color: #215e99;
+            font-size: 11px;
+            /* Reduced */
+        }
+
+        .main-footer .border {
+            width: 100%;
+            border-top: 2px solid #215e99;
+            /* Reduced thickness */
+        }
+
+        .main-footer p {
+            font-size: 15px;
+            /* Reduced */
+            line-height: auto;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <table class="header-table">
-            <tr>
-                <td class="logo">
-                    <img src="{{ public_path('storage/resources/lpa-logo.png') }}" alt="London Professional Academy Logo">
-                </td>
-                <td class="logo-text" style="text-align:center">
-                    <b> London Professional <br>
-                        Academy</b>
-                </td>
-                <td class="address">
-                    <p>Roycraft House</p>
-                    <p>15 Linton Road, Barking</p>
-                    <p>IG11 8HE, United Kingdom</p>
-                </td>
-            </tr>
-        </table>
-        <hr>
+    <div class="content">
+        <!-- header -->
+        <div class="header">
+            <div class="container">
+                <div>
+                    <img
+                        src="{{ public_path('storage/resources/lpa-logo.png') }}"
+                        alt=""
+                        class="lpa_logo" />
+                </div>
+                <h1>
+                    LONDON <br />
+                    PROFESSIONAL <br />
+                    ACADEMY
+                </h1>
+            </div>
+            <div class="container">
+                <p>
+                    Roycraft House <br />
+                    15 Linton Road <br />
+                    Barking <br />
+                    IG11 8HE <br />
+                    United Kingdom
+                </p>
+                <div>
+                    <img
+                        src="{{ public_path('storage/resources/location_pin.png') }}"
+                        alt=""
+                        class="location_pin" />
+                </div>
+            </div>
+        </div>
+        <!-- Body -->
+        <div class="body">
+            <!--  -->
+            <div class="container">
+                <div class="intro">
+                    <div class="embassy">
+                        <div class="uk-embassy">British High Commission</div>
+                        <div class="country-embassy">{{ $student->embassy }}</div>
+                    </div>
+                    <div class="date">{{ date('jS F Y') }}</div>
+                </div>
+            </div>
+            <!--  -->
+            <h4>COURSE ACCEPTANCE LETTER</h4>
+            <!-- text -->
+            <p>
+                Dear Entry Clearance Officer, <br />
+                I write to confirm that below mentioned student has met the criteria
+                for and has been accepted for the course of study at our institute.
+                Please find the details for the student below:
+            </p>
 
-        <!-- Date and Embassy Section -->
-        <p><strong>{{ date('jS F Y') }}</strong></p>
-        <p>{{ $student->embassy }}</p>
+            <!-- Tables -->
+            <div class="tables">
+                <table rules="all">
+                    <tr>
+                        <th>Application Ref.</th>
+                        <td>Ref: LPA/{{ $student->course_code }}{{ $student->r_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Student Name</th>
+                        <td>{{ $student->first_name }} {{ $student->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Passport No</th>
+                        <td>{{ $student->passport_number }}</td>
+                    </tr>
+                </table>
 
-        <!-- Title Section -->
-        <h2 style="text-align:center">Course Acceptance Letter</h2>
-        <p>Dear Entry Clearance Officer,</p>
-        <p>I write to confirm that the below-mentioned student has met the criteria for and has been accepted for the course of study at our institute. Please find the details for the student below:</p>
+                <table rules="all">
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{ $student->gender }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth</th>
+                        <td>{{ $student->date_of_birth }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nationality</th>
+                        <td>{{ $student->nationality }}</td>
+                    </tr>
+                </table>
+            </div>
 
-        <!-- Student Details -->
-        <h4>Student Details</h4>
-        <table>
-            <tr>
-                <td><strong>Application Ref:</strong></td>
-                <td>Ref: LPA/{{ $student->course_code }}{{ $student->r_id }} </td>
-                <td><strong>Gender:</strong></td>
-                <td>{{ $student->gender }}</td>
-            </tr>
-            <tr>
-                <td><strong>Student Name:</strong></td>
-                <td>{{ $student->first_name }} {{ $student->last_name }}</td>
-                <td><strong>Date of Birth:</strong></td>
-                <td>{{ $student->date_of_birth }}</td>
-            </tr>
-            <tr>
-                <td><strong>Passport No.:</strong></td>
-                <td>{{ $student->passport_number }}</td>
-                <td><strong>Nationality:</strong></td>
-                <td>{{ $student->nationality }}</td>
-            </tr>
-        </table>
+            <p>The course details are as follows:</p>
 
-        <!-- Course Details -->
-        <h4>Course Details</h4>
-        <table>
-            <tr>
-                <td><strong>Course:</strong></td>
-                <td>{{ $course->course_name }}</td>
-                <td><strong>Study Level:</strong></td>
-                <td>Level 2 Certification</td>
-            </tr>
-            <tr>
-                <td><strong>Qualification:</strong></td>
-                <td>{{ $course->final_qualification }}</td>
-                <td><strong>Course Type:</strong></td>
-                <td>Full Time</td>
-            </tr>
-            <tr>
-                <td><strong>Commencement:</strong></td>
-                <td>{{ date('jS F Y', strtotime($course->course_completion_date)) }}</td>
-                <td><strong>Completion:</strong></td>
-                <td>{{ date('jS F Y', strtotime($course->course_completion_date)) }}</td>
-            </tr>
-            <tr>
-                <td><strong>Tuition Fee:</strong></td>
-                <td>£{{ number_format($course->tuition_fee, 2) }} (Paid)</td>
-                <td><strong>Registration:</strong></td>
-                <td>£{{ number_format($course->registration_fee, 2) }} (Paid)</td>
-            </tr>
-        </table>
+            <!-- Tables -->
+            <div class="tables">
+                <table rules="all">
+                    <tr>
+                        <th>Course</th>
+                        <td>{{ $course->course_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Qualification</th>
+                        <td>{{ $course->final_qualification }}</td>
+                    </tr>
+                    <tr>
+                        <th>Hours per week</th>
+                        <td>{{ $course->hours_per_week }}</td>
+                    </tr>
+                    <tr>
+                        <th>Commencement</th>
+                        <td>
+                            {{ date('jS F Y', strtotime($course->course_completion_date)) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tuition Fee</th>
+                        <td>£{{ number_format($course->tuition_fee, 2) }} (Paid)</td>
+                    </tr>
+                </table>
 
-        <!-- Closing Section -->
-        <p>The student has paid their full course fees in advance. I would be grateful for any assistance you can provide this student to enable them to process a visa to enter the United Kingdom to commence their course of studies.</p>
-        <p>For information on short-term study visas, refer to the link: <a href="https://www.gov.uk/visa-to-study-english">https://www.gov.uk/visa-to-study-english</a></p>
-        <p>Should you require any further information regarding the student's forthcoming studies, please do not hesitate to contact us.</p>
+                <table rules="all">
+                    <tr>
+                        <th>Study Level</th>
+                        <td>Level 2 Certification</td>
+                    </tr>
+                    <tr>
+                        <th>Course Type</th>
+                        <td>Full Time</td>
+                    </tr>
+                    <tr>
+                        <th>Duration/th></th>
+                        <td>{{$course->course_duration}}</td>
+                    </tr>
+                    <tr>
+                        <th>Completion</th>
+                        <td>£{{ number_format($course->registration_fee, 2) }} (Paid)</td>
+                    </tr>
+                    <tr>
+                        <th>Registration</th>
+                        <td>£{{ number_format($course->registration_fee, 2) }} (Paid)</td>
+                    </tr>
+                </table>
+            </div>
+            <!--  -->
+            <p>
+                The student has paid their full course fees in advance. I would be
+                grateful for any assistance you can provide this student to enable
+                them to process a visa to enter the United Kingdom to commence his
+                course of studies. For information on short-term study visas, refer to
+                the link:
+                <a href=" https://www.gov.uk/visa-to-study-english">
+                    https://www.gov.uk/visa-to-study-english</a>
+                Should you require any further information regarding the student’s
+                forthcoming studies, please do not hesitate to contact us. <br />
+                Yours faithfully
+            </p>
 
-        <!-- Signature and QR Section -->
-        <table class="header-table">
-            <tr>
-                <td class="signature">
-                    <p>Yours faithfully,</p>
-                    <img src="{{ public_path('storage/resources/paul-signature.jpeg') }}" alt="Signature">
-                    <p><strong>Paul Smith</strong></p>
-                    <p>Director of Admissions</p>
-                    <p>London Professional Academy</p>
-                </td>
-                <td class="qr">
-                    <img src="{{ $qrCodePath }}" alt="QR Code">
-                </td>
-
-
-            </tr>
-        </table>
-        <hr>
-        <!-- Footer Section -->
-        <table class="footer-table">
-            <tr>
-                <td style="text-align: center;">
-                    <p>London Professional Academy (Registered in England and Wales. Company No: 12249241)</p>
-                    <p>Tel: +44 (0) 203 4111 651 - Email: <a href="mailto:info@londonpro.org.uk">info@londonpro.org.uk</a></p>
-                    <p>Web: <a href="http://www.londonpro.org.uk">www.londonpro.org.uk</a></p>
-                </td>
-            </tr>
-        </table>
+            <div class="footer">
+                <div>
+                    <img
+                        src="{{ public_path('storage/resources/paul-signature.jpeg') }}"
+                        alt="signature"
+                        class="signature" />
+                    <p>
+                        <b>Director of Admissions</b><br />
+                        London Professional Academy <br />
+                        United Kingdom
+                    </p>
+                </div>
+                <img src="{{ $qrCodePath }}" alt="QR code" class="qr" />
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="main-footer">
+            <div class="border">
+                <div class="text">
+                    <p>
+                        London Professional Academy (Registered in England and Wales.
+                        Company No: 12249241) <br />
+                        <b>Tel:</b> +44 (0) 203 4111 651 -
+                        <b>Email:</b> info@londonpro.org.uk - <b>Web:</b>
+                        http://www.londonpro.org.uk
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
