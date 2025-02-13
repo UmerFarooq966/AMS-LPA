@@ -240,8 +240,7 @@
                         <tr>
                             <th>Completion</th>
                             <td>
-                                {{ date('jS F Y', strtotime($course->course_completion_date))
-                  }}
+                                {{ date('jS F Y', strtotime($course->course_completion_date)) }}
                             </td>
                         </tr>
                         <tr>
